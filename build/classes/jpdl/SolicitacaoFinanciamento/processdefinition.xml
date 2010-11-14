@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns=""  name="SolicitacaoFinanciamento">
+
+
+	<start-state name="Contrato Assinado">
+		<transition to="Pre-Cadastrar no Portal"></transition>
+	</start-state>
+
+
+	<task-node name="Pre-Cadastrar no Portal">
+		<task name="Pre-Cadastra no Portal">
+			<description>
+				Solicitacao de Pre-Cadastro de #{identity.username}
+			</description>
+			<assignment actor-id="#{initiator}"></assignment>
+		</task>
+		<transition to="Complementa Dados" name="agencia-reguladora.envia.complementadados">
+			
+		</transition>
+	</task-node>
+
+	<task-node name="Complementa Dados">
+		<task name="Complementa Dados">
+			<description>
+				Complementa Dados da Proposta
+			</description>
+			<assignment pooled-actors="contratada"></assignment>
+		</task>
+		<transition to="Proposta Financiamento" name="contratada.solicitafinanciamento"></transition>
+	</task-node>
+
+	<task-node name="Proposta Financiamento">
+		<task name="Proposta Financiamento">
+			<description>
+				Proposta de Financiamento para Bancos
+			</description>
+			<assignment pooled-actors="contratada"></assignment>
+		</task>
+		<transition to="Apresentar Proposta Financiamento" name="bancos.apresentaproposta"></transition>
+	</task-node>
+
+	<task-node name="Apresentar Proposta Financiamento">
+		<task name="Apresentar Proposta Financiamento">
+			<description>
+				Banco apresenta Proposta de Financiamento
+			</description>
+			<assignment pooled-actors="bancos"></assignment>
+		</task>
+		<transition to="Recursos Depositados" name="fim"></transition>
+		<transition to="Fim Reprovado" name="reprovado"></transition>
+	</task-node>
+
+
+	<end-state name="Recursos Depositados"></end-state>
+
+	<end-state name="Fim Reprovado"></end-state>
+
+
+</process-definition>

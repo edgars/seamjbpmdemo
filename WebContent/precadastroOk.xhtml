@@ -1,0 +1,54 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+    <f:facet name="header">Pré-Cadastro da Proposta Salvo</f:facet>
+		<h:form>
+		Os Dados abaixo foram Salvos com sucesso, porém observe sua Inbox!
+		<table>
+		<tr>
+				<td>Código do Pré-Cadastro: </td>
+				<td> <h:outputText value="#{contratada.id}"/> </td>
+			</tr>
+			<tr>
+				<td>Razão Social: </td>
+				<td><h:outputText value="#{contratada.razao}"/></td>
+			</tr>
+			<tr>
+				<td>CNPJ:</td>
+				<td><h:outputText value="#{contratada.cnpj}"/> </td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				    <rich:panel>
+    <f:facet name="header">Inbox: Veja as Suas Tarefas como Agência Regulamentadora</f:facet>
+		<rich:dataTable value="#{taskInstanceList}" var="_task">
+			<rich:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{_task.id}"/>
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Tarefa Pendente ...</f:facet>
+				<s:link action="#{agenciaService.enviarParaContratada()}" taskInstance="#{_task}"><h:outputText value="#{_task.name}"/>  Referente ao Id de Proposta: <h:outputText value="#{_task.getVariable('idContratada')}"/></s:link>
+			</rich:column>
+		</rich:dataTable>
+    </rich:panel>
+				
+					
+				</td>
+			</tr>
+		</table>
+		</h:form>
+    </rich:panel>
+    
+</ui:define> 
+</ui:composition>

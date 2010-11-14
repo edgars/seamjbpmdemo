@@ -1,0 +1,53 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+    <f:facet name="header">Complementa Cadastro</f:facet>
+		<h:form>
+		<table>
+			<tr>
+				<td>Razão Social: </td>
+				<td><h:outputText value="#{contratada.razao}"/> </td>
+			</tr>
+			<tr>
+				<td>CNPJ:</td>
+				<td><h:outputText value="#{contratada.cnpj}"/> </td>
+			</tr>
+			
+			<tr>
+				<td>Endereço:</td>
+				<td><h:outputText value="#{contratada.endereco}"/> </td>
+			</tr>
+			
+			<tr>
+				<td>Complemento:</td>
+				<td><h:outputText value="#{contratada.complemento}"/> </td>
+			</tr>
+			
+			  <tr>
+				<td>Estado:</td>
+				<td> <h:outputText value="#{contratada.estado}"/></td>
+			</tr>
+			
+			
+			<tr>
+				<td colspan="2">
+					<h:commandButton value="Aprovar" action="#{bancos.aprova()}"/>
+					<h:commandButton value="Negar" action="#{bancos.reprova()}"/>
+				</td>
+			</tr>
+		</table>
+		</h:form>
+    </rich:panel>
+    
+</ui:define> 
+</ui:composition>

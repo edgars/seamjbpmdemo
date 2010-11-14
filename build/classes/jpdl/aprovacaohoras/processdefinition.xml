@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition xmlns="urn:jbpm.org:jpdl-3.2"
+	name="AprovacaoHoras">
+
+	<start-state name="start">
+		<transition to="Verificacao de Solicitacoes"></transition>
+	</start-state>
+
+	<task-node name="Validacao da Solicitacao">
+		<task name="Validar Solicitacao">
+			<assignment actor-id="#{initiator}"></assignment>
+		</task>
+		<event type="node-enter">
+			<action name="Acao" class="com.redhat.jbpmdemo.jbpmaction.SAHandler"></action>
+		</event>
+		<transition to="Verificacao de Solicitacoes" name="Solicitar Reavaliacao"></transition>
+		<transition to="Aprovado" name="Aceitar"></transition>
+	</task-node>
+
+	<task-node name="Verificacao de Solicitacoes">
+		<task name="Verificar Solicitacao">
+			<description>
+				Solicitacao de Hora extra funcionario #{identity.username}
+			</description>
+			<assignment pooled-actors="manager"></assignment>
+			<timer duedate="30 seconds" repeat="30 seconds">
+				<action class="com.redhat.jbpmdemo.jbpmaction.TaskPrioritySLA"></action>
+			</timer>
+		</task>
+		<transition to="Reprovado" name="Reprovar"></transition>
+		<transition to="Validacao da Solicitacao" name="Aprovar"></transition>
+	</task-node>
+
+	<end-state name="Reprovado"></end-state>
+
+	<end-state name="Aprovado"></end-state>
+</process-definition>

@@ -1,0 +1,68 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+    <f:facet name="header">Enviar Proposta de Financiamento aos Bancos</f:facet>
+		<h:form>
+		<table>
+			<tr>
+				<td>Razão Social: </td>
+				<td><h:outputText value="#{contratada.razao}"/> </td>
+			</tr>
+			<tr>
+				<td>CNPJ:</td>
+				<td><h:outputText value="#{contratada.cnpj}"/> </td>
+			</tr>
+			
+			<tr>
+				<td>Endereço:</td>
+				<td><h:inputText value="#{contratada.endereco}"/> </td>
+			</tr>
+			
+			<tr>
+				<td>Complemento:</td>
+				<td><h:inputText value="#{contratada.complemento}"/> </td>
+			</tr>
+			
+			  <tr>
+				<td>Estado:</td>
+				<td>
+			<rich:comboBox defaultLabel="Entre com Apenas 2 Letras" value="#{contratada.estado}">
+            <f:selectItem itemValue="PA"/>
+            <f:selectItem itemValue="SP"/>
+            <f:selectItem itemValue="RJ"/>
+            <f:selectItem itemValue="MG"/>
+            <f:selectItem itemValue="RS"/>
+            <f:selectItem itemValue="PR"/>
+            <f:selectItem itemValue="PB"/>
+           
+      </rich:comboBox>
+				
+				</td>
+			</tr>
+			
+			
+			
+			
+
+			
+			<tr>
+				<td colspan="2">
+					<h:commandButton value="Solicitar Proposta de Financiamento" action="#{contratadaBeanService.enviaParaBanco()}"/>
+				</td>
+			</tr>
+		</table>
+		</h:form>
+    </rich:panel>
+    
+</ui:define> 
+</ui:composition>

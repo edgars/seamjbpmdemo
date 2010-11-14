@@ -1,0 +1,34 @@
+<rich:toolBar
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:rich="http://richfaces.org/rich">
+    <rich:toolBarGroup>
+       <img src="img/JBoss_byRH_logo_whiteXXSmall.png"></img>
+        <s:link id="menuHomeId" view="/home.xhtml" value="Home" propagation="none"/>
+        
+        <!-- Menu caso usuario seja do grupo Agencia-Reguladora -->
+        <s:link view="/precadastra.xhtml" value="Pre-Proposta" rendered="#{s:hasRole('agencia-reguladora')}"/>
+         <s:link view="/agenciaInbox.xhtml" value="Caixa de Entrada" rendered="#{s:hasRole('agencia-reguladora')}"/>
+        
+        <!-- Menu caso usuario seja do grupo Contratada -->
+        
+        <s:link view="/contratadaInbox.xhtml" value="Caixa de Entrada" rendered="#{s:hasRole('contratada')}"/>
+        
+         <!-- Menu caso usuario seja do grupo Bancos -->
+        
+        <s:link view="/bancosInbox.xhtml" value="Caixa de Entrada [ Bancos ]" rendered="#{s:hasRole('bancos')}"/>
+        
+        <s:link view="/solicitarHoras.xhtml" value="Solicitar Hora Extra" rendered="#{s:hasRole('user')}"/>
+        <s:link view="/listarSolicitacoes.xhtml" value="Verificar Solicitacoes de Hora Extra" rendered="#{s:hasRole('manager')}"/>
+        <s:link view="/listarPendencias.xhtml" value="Veriricar Retorno de Solicitacao" rendered="#{s:hasRole('user')}"></s:link>
+    </rich:toolBarGroup>
+    <!-- @newMenuItem@ -->
+    <rich:toolBarGroup location="right">
+        <h:outputText id="menuWelcomeId" value="Usuário Autenticado: #{credentials.username}" rendered="#{identity.loggedIn}"/>
+        <s:link id="menuLoginId" view="/login.xhtml" value="Login" rendered="#{not identity.loggedIn}" propagation="none"/>
+        <s:link id="menuLogoutId" view="/home.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+    </rich:toolBarGroup>
+</rich:toolBar>

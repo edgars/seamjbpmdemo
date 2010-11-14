@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root-container name="SolicitacaoFinanciamento" width="998" height="482">
+  <node name="Contrato Assinado" x="52" y="30" width="195" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Pre-Cadastrar no Portal" x="324" y="24" width="189" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Complementa Dados" x="324" y="120" width="190" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Proposta Financiamento" x="324" y="216" width="350" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Apresentar Proposta Financiamento" x="324" y="288" width="345" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Recursos Depositados" x="336" y="372" width="204" height="36"/>
+  <node name="Fim Reprovado" x="840" y="276" width="157" height="49"/>
+  <deployment serverName="localhost" serverPort="8080" serverDeployer="/jbpm-console/upload">
+    <classesAndResources>
+      <element value="/seamworkflow/src/hot/com/redhat/jbpmdemo/components/PetrobrasActionHandler.java"/>
+    </classesAndResources>
+    <filesAndFolders>
+      <element value="/seamworkflow/src/main/jpdl/SolicitacaoFinanciamento/gpd.xml"/>
+      <element value="/seamworkflow/src/main/jpdl/SolicitacaoFinanciamento/processdefinition.xml"/>
+      <element value="/seamworkflow/src/main/jpdl/SolicitacaoFinanciamento/processimage.jpg"/>
+    </filesAndFolders>
+  </deployment>
+</root-container>

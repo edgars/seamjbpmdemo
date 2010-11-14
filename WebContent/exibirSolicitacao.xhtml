@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+    <f:facet name="header">Formulário de solicitação de Hora Extra</f:facet>
+		<h:form>
+		<table>
+			<tr>
+				<td>Solicitante: </td>
+				<td><h:outputText value="#{solicitacao.funcionario}"/> </td>
+			</tr>
+			<tr>
+				<td>Projeto: </td>
+				<td><h:outputText value="#{solicitacao.projeto}"/> </td>
+			</tr>
+			<tr>
+				<td>Horas Solicitadas</td>
+				<td><h:outputText value="#{solicitacao.qtdHoras}"/> </td>
+			</tr>
+			<tr>
+				<td>Quantidade Aprovada </td>
+				<td><h:inputText value="#{solicitacao.qtdAprovadas}"/> </td>
+			</tr>
+			<s:fragment rendered="#{solicitacao.observacoes != null}">
+			<tr>
+				<td>Observações</td>
+				<td><h:inputTextarea value="#{solicitacao.observacoes}" cols="80" rows="6" readonly="readonly"/></td>
+			</tr>
+			</s:fragment>
+			<tr>
+				<td colspan="2">
+					<h:commandButton action="#{gerenteService.aprovar()}" value="Aprovar"/>
+					<h:commandButton action="#{gerenteService.reprovar()}" value="Reprovar"/>
+				</td>
+			</tr>
+		</table>
+		</h:form>
+    </rich:panel>
+    
+</ui:define> 
+</ui:composition>

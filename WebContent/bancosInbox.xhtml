@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<rich:panel>
+			<f:facet name="header">Caixa de Entrada do Grupo: Bancos</f:facet>
+        
+        <h3>Aqui estão todas as Tarefas disponíveis para seu Grupo:</h3>
+
+		<rich:dataTable value="#{pooledTaskInstanceList}" var="_task">
+				<rich:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{_task.id}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">Tarefa Pendente ...</f:facet>
+
+						<h:outputText value="#{_task.name}" /> Proposta: <h:outputText
+							value="#{_task.getVariable('idContratada')}" />
+				
+				</rich:column>
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>#{_task.description}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Criação</f:facet>
+					<h:outputText value="#{_task.create}">
+						<s:convertDateTime type="both" timeStyle="short" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<s:link action="#{pooledTask.assignToCurrentActor}"
+						taskInstance="#{_task}" value="Associar a meu Usuário" />
+				</h:column>
+		
+
+			</rich:dataTable>
+		</rich:panel>
+
+    <rich:panel rendered="#{identity.loggedIn and not empty taskInstanceList}">
+    <f:facet name="header"><h:outputText value="Caixa de Entrada pessoal de:  #{identity.credentials.username}" /></f:facet>
+    
+
+		<rich:dataTable value="#{taskInstanceList}" var="_taskC"> 
+			<rich:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{_taskC.id}"/>
+			</rich:column>
+			<h:column>
+					<f:facet name="header">Criação</f:facet>
+					<h:outputText value="#{_taskC.create}">
+						<s:convertDateTime type="both" timeStyle="short" />
+					</h:outputText>
+				</h:column>
+				
+			<h:column>
+					<f:facet name="header">Inicio</f:facet>
+					<h:outputText value="#{_taskC.start}">
+						<s:convertDateTime type="both" timeStyle="short" />
+					</h:outputText>
+				</h:column>	
+			<rich:column>
+				<f:facet name="header">Tarefa Pendente ...</f:facet>
+				<h4><h:outputText value="#{_taskC.name}"/>  Referente ao Id de Proposta: <h:outputText value="#{_taskC.getVariable('idContratada')}"/> <h:outputText value=", Processo: #{_taskC.processInstance.id}"/></h4>
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Ações</f:facet>
+				<s:link action="#{bancos.forneceFinanciamento()}" taskInstance="#{_taskC}"> Aprovar Financiamento </s:link>
+
+
+			</rich:column>
+		</rich:dataTable>
+    </rich:panel>
+
+	</ui:define>
+</ui:composition>
